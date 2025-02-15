@@ -1,0 +1,9 @@
+# Ignore Visual Studio files
+.vs/
+.vscode/
+bin/
+obj/
+
+# Ignore system files (optional)
+Thumbs.db
+Desktop.ini
