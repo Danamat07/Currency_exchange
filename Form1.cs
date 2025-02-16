@@ -18,6 +18,7 @@ namespace CurrencyXChange
         {
             InitializeComponent();
             this.Load += new EventHandler(Form1_Load);
+            btnConvert.Click += btnConvert_Click;
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -75,6 +76,71 @@ namespace CurrencyXChange
                     MessageBox.Show("Failed to connect to the API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return new List<string>();
                 }
+            }
+        }
+
+        private async Task<decimal> GetConversionRateAsync(string fromCurrency, string toCurrency)
+        {
+            string apiKey = "a822183107ba204e7328ff09";
+            string apiUrl = $"https://v6.exchangerate-api.com/v6/{apiKey}/latest/{fromCurrency}";
+
+            using (HttpClient client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    dynamic jsonData = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResponse);
+
+                    if (jsonData.result == "success")
+                    {
+                        // retrieve conversion rate for the "toCurrency"
+                        decimal conversionRate = jsonData.conversion_rates[toCurrency];
+                        return conversionRate;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to get conversion rate from API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return 0m; // return 0 to indicate failure
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to connect to the API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return 0m;
+                }
+            }
+        }
+
+        private async void btnConvert_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // get input amount
+                decimal amount = decimal.Parse(txtAmount.Text);
+                // get selected currencies
+                string fromCurrency = cmbFromCurrency.SelectedItem.ToString();
+                string toCurrency = cmbToCurrency.SelectedItem.ToString();
+                // get conversion rate from the api
+                decimal conversionRate = await GetConversionRateAsync(fromCurrency, toCurrency);
+
+                if (conversionRate > 0)
+                {
+                    // convert
+                    decimal result = amount * conversionRate;
+
+                    // display result
+                    txtResult.Text = result.ToString("F2");
+                }
+                else
+                {
+                    txtResult.Text = "Error";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid input. Please check the amount and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
