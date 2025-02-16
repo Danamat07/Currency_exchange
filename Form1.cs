@@ -102,7 +102,7 @@ namespace CurrencyXChange
                     else
                     {
                         MessageBox.Show("Failed to get conversion rate from API.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return 0m; // return 0 to indicate failure
+                        return 0m;
                     }
                 }
                 else
