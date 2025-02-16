@@ -16,3 +16,13 @@ CurrencyXChange is an easy-to-use currency converter that provides real-time exc
 - ✅ Simple, Clean Interface: User-friendly design with intuitive input fields and real-time results.
 - ✅ Error Handling: Robust error handling for failed API requests, empty inputs, or invalid conversions.
 - ✅ Multiple Currencies Supported: Convert between a wide range of world currencies like USD, EUR, GBP, and more!
+
+## Project Structure 🏗️
+  > Form1.cs - Main logic for currency conversion and UI interaction
+> 
+  > Form1.Designer.cs - Designer code where UI components are initialized
+
+## Installation 🔧
+To get started with CurrencyXChange on your local machine:
+  1. Clone the Repository: git clone https://github.com/yourusername/CurrencyXChange.git
+  2. Install Dependencies: This project uses Newtonsoft.Json for JSON parsing and HttpClient for API requests.
