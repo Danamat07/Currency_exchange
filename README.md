@@ -5,6 +5,7 @@ CurrencyXChange is an easy-to-use currency converter that provides real-time exc
 ## Technologies Used ⚙️
 ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=.net&logoColor=white)
 ![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" height="40" alt="visualstudio logo"  />
   - C# (.NET Framework): The backbone of this Windows Forms Application.
   - Windows Forms: Provides the graphical interface for users to interact with the application.
   - ExchangeRate-API: Used to fetch real-time exchange rates and supported currency codes.
